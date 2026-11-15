@@ -1,15 +1,15 @@
-module accel_top #(parameter N = 4) (
-    input  wire                clk,
-    input  wire                rst,
-    input  wire                cfg_we,
-    input  wire [1:0]          cfg_addr,
-    input  wire [7:0]          cfg_data,
-    input  wire [N*8-1:0]      a_flat,
-    output wire [N*8-1:0]      y_flat
+module accel_top #(parameter N = 4, parameter DEPTH = 8) (
+    input  wire        clk,
+    input  wire        rst,
+    input  wire        cfg_we,
+    input  wire        cfg_re,
+    input  wire [3:0]  cfg_addr,
+    input  wire [7:0]  cfg_data,
+    output wire [7:0]  cfg_rdata
 );
     wire              rst_core, relu_q;
     wire [4:0]        shift_q;
-    wire [N*8-1:0]    w_rows;
+    wire [N*8-1:0]    w_rows, a_flat, y_flat;
     wire [N*N-1:0]    load_en;
     wire [N*N*8-1:0]  w_flat;
 
@@ -30,6 +30,13 @@ module accel_top #(parameter N = 4) (
         .clk(clk), .rst(rst_core),
         .cfg_we(cfg_we), .cfg_addr(cfg_addr), .cfg_data(cfg_data),
         .w_rows(w_rows), .load_en(load_en)
+    );
+
+    buf_ctrl #(.N(N), .DEPTH(DEPTH)) u_bc (
+        .clk(clk), .rst(rst_core),
+        .cfg_we(cfg_we), .cfg_re(cfg_re), .cfg_addr(cfg_addr), .cfg_data(cfg_data),
+        .cfg_rdata(cfg_rdata),
+        .a_flat(a_flat), .y_flat(y_flat)
     );
 
     accel_core #(.N(N)) u_core (

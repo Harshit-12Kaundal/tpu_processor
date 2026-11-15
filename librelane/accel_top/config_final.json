@@ -10,6 +10,7 @@
     "dir::../../rtl/accel_core.v",
     "dir::../../rtl/cfg_regs.v",
     "dir::../../rtl/weight_loader.v",
+    "dir::../../rtl/buf_ctrl.v",
     "dir::../../rtl/accel_top.v"
   ],
   "CLOCK_PORT": "clk",

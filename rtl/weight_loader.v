@@ -2,7 +2,7 @@ module weight_loader #(parameter N = 4) (
     input  wire                clk,
     input  wire                rst,
     input  wire                cfg_we,
-    input  wire [1:0]          cfg_addr,   // 2: write next weight byte, 3: reset pointer
+    input  wire [3:0]          cfg_addr,   // 2: write next weight byte, 3: reset pointer
     input  wire [7:0]          cfg_data,
     output wire [N*8-1:0]      w_rows,     // one private copy of the byte per PE row
     output reg  [N*N-1:0]      load_en
@@ -11,7 +11,7 @@ module weight_loader #(parameter N = 4) (
     localparam IW = $clog2(NW);
     reg [IW-1:0] idx;
 
-    wire wr = cfg_we && (cfg_addr == 2'd2);
+    wire wr = cfg_we && (cfg_addr == 4'd2);
 
     always @(posedge clk) begin
         if (rst) begin
@@ -23,7 +23,7 @@ module weight_loader #(parameter N = 4) (
                 load_en[idx] <= 1'b1;
                 if (idx == NW - 1) idx <= {IW{1'b0}};
                 else               idx <= idx + 1'b1;
-            end else if (cfg_we && cfg_addr == 2'd3) begin
+            end else if (cfg_we && cfg_addr == 4'd3) begin
                 idx <= {IW{1'b0}};
             end
         end
