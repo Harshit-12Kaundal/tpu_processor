@@ -1,0 +1,26 @@
+{
+  "DESIGN_NAME": "accel_top",
+  "VERILOG_FILES": [
+    "dir::../../rtl/pe.v",
+    "dir::../../rtl/skew.v",
+    "dir::../../rtl/systolic.v",
+    "dir::../../rtl/deskew.v",
+    "dir::../../rtl/matmul_core.v",
+    "dir::../../rtl/act.v",
+    "dir::../../rtl/accel_core.v",
+    "dir::../../rtl/cfg_regs.v",
+    "dir::../../rtl/weight_loader.v",
+    "dir::../../rtl/accel_top.v"
+  ],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 25,
+  "FP_CORE_UTIL": 40,
+  "DESIGN_REPAIR_MAX_SLEW_PCT": 40,
+  "DESIGN_REPAIR_MAX_CAP_PCT": 40,
+  "GRT_DESIGN_REPAIR_MAX_SLEW_PCT": 30,
+  "GRT_DESIGN_REPAIR_MAX_CAP_PCT": 30,
+  "EXTRA_EXCLUDED_CELLS": [
+    "sky130_fd_sc_hd__clkdlybuf4s25_1",
+    "sky130_fd_sc_hd__clkdlybuf4s25_2"
+  ]
+}

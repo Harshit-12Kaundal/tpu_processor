@@ -1,0 +1,15 @@
+{
+  "DESIGN_NAME": "accel_core",
+  "VERILOG_FILES": [
+    "dir::../../rtl/pe.v",
+    "dir::../../rtl/skew.v",
+    "dir::../../rtl/systolic.v",
+    "dir::../../rtl/deskew.v",
+    "dir::../../rtl/matmul_core.v",
+    "dir::../../rtl/act.v",
+    "dir::../../rtl/accel_core.v"
+  ],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 25,
+  "FP_CORE_UTIL": 40
+}
